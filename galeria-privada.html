@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeria Privada — Rafael Lima Fotografia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style/galeria.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">Voltar ao site</a>
+  <a href="index.html" class="nav-logo">Rafael<span>.</span>Lima</a>
+  <div style="width:130px; text-align:right;">
+    <button id="btn-logout" onclick="logout()" style="display:none; background:none; border:none; cursor:pointer; color:var(--muted); font-family:'Jost',sans-serif; font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; transition:color .3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Sair ↗</button>
+  </div>
+</nav>
+
+<!-- ══════════════════ TELA LOGIN ══════════════════ -->
+<div id="screen-login">
+  <div class="login-bg"></div>
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80&fit=crop" alt="Rafael Lima">
+      <span class="login-logo-name">Rafael<span>.</span>Lima</span>
+      <span class="login-logo-sub">Galeria Privada de Clientes</span>
+    </div>
+    <div class="login-card">
+      <h2 class="login-title">Acesse sua galeria</h2>
+      <p class="login-subtitle">Insira o código exclusivo enviado por Rafael para visualizar e baixar suas fotos.</p>
+      <div class="login-error" id="loginError">
+        <span>✕</span> Código inválido. Verifique e tente novamente.
+      </div>
+      <div class="login-field">
+        <label>Código de Acesso</label>
+        <input type="text" id="accessCode" placeholder="Ex: ANNA-PEDRO-2024" maxlength="20" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <div class="login-field password-field">
+        <label>Senha</label>
+        <input type="password" id="accessPass" placeholder="Senha enviada por e-mail" onkeydown="if(event.key==='Enter')doLogin()">
+        <button class="toggle-pass" onclick="togglePassword()">Ver</button>
+      </div>
+      <button class="login-btn" onclick="doLogin()">Acessar Galeria →</button>
+      <p class="login-hint">
+        Não recebeu seus dados de acesso?<br>
+        <strong>Entre em contato pelo WhatsApp ou e-mail com Rafael.</strong>
+      </p>
+      <p class="login-demo-hint">Use qualquer código e senha</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TELA GALERIA ══════════════════ -->
+<div id="screen-gallery">
+
+  <!-- EXPIRE NOTICE -->
+  <div class="expire-notice">
+    <span class="expire-text">Galeria de <strong id="gallery-client-name">Ana & Pedro</strong></strong></span>
+    <span class="expire-timer" id="expire-date">Expira em: 14/06/2027</span>
+  </div>
+
+  <!-- SUB NAV TABS -->
+  <div class="gallery-subnav">
+    <button class="gal-tab active" onclick="switchTab(this,'all')">Todas <span class="gal-count" id="count-all">48</span></button>
+    <button class="gal-tab" onclick="switchTab(this,'ceremony')">Cerimônia <span class="gal-count">18</span></button>
+    <button class="gal-tab" onclick="switchTab(this,'party')">Festa <span class="gal-count">16</span></button>
+    <button class="gal-tab" onclick="switchTab(this,'details')">Detalhes <span class="gal-count">8</span></button>
+    <button class="gal-tab" onclick="switchTab(this,'favorites')">Favoritos <span class="gal-count" id="count-favs">0</span></button>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-block"><span class="stat-num" id="stat-photos">48</span><span class="stat-lbl">Fotos</span></div>
+    <div class="stat-block"><span class="stat-num" id="stat-favs">0</span><span class="stat-lbl">Favoritas</span></div>
+    <div class="stat-block"><span class="stat-num">1,2 GB</span><span class="stat-lbl">Tamanho total</span></div>
+    <div class="stat-block"><span class="stat-num">5472×3648</span><span class="stat-lbl">Resolução máxima</span></div>
+    <div class="stat-block"><span class="stat-num">RAW + JPG</span><span class="stat-lbl">Formatos</span></div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="gallery-header">
+    <div class="gallery-title-block">
+      <span class="gallery-event-label">Casamento</span>
+      <h2 class="gallery-event-name" id="gallery-event-name">Ana &amp; Pedro</h2>
+      <div class="gallery-event-meta">
+        <span>15 de Março de 2025</span>
+        <span>Fazenda das Flores, Campinas</span>
+        <span>Rafael Lima</span>
+      </div>
+    </div>
+    <div class="gallery-actions">
+      <button class="btn-action" onclick="showToast('Compartilhamento copiado!')">Compartilhar</button>
+      <button class="btn-action primary" onclick="showToast('Iniciando download de todas as fotos…')">↓ Download Total</button>
+    </div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="gallery-toolbar">
+    <div class="gallery-search">
+      <span>↗</span>
+      <input type="text" placeholder="Buscar fotos...">
+    </div>
+    <div class="toolbar-right">
+      <button class="select-all-btn" onclick="toggleSelectAll()">Selecionar todas</button>
+      <span class="selected-count" id="selectedCount">0 selecionadas</span>
+      <div class="view-toggle">
+        <button class="view-btn active" onclick="setView(this,'grid')" title="Grade">⊞</button>
+        <button class="view-btn" onclick="setView(this,'list')" title="Lista">☰</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTO GRID -->
+  <div class="gallery-container">
+    <div class="photo-grid" id="photoGrid"></div>
+  </div>
+
+</div><!-- /screen-gallery -->
+
+<!-- FLOAT BAR -->
+<div class="float-bar" id="floatBar">
+  <span class="float-bar-text"><strong id="fbCount">0</strong> fotos selecionadas</span>
+  <div class="float-bar-actions">
+    <button class="float-btn-ghost" onclick="clearSelection()">Limpar</button>
+    <button class="float-btn" onclick="showToast('Download iniciado!')">↓ Baixar Seleção</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✦</span>
+  <span id="toastMsg">Mensagem</span>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-nav">
+    <span class="lightbox-title" id="lbTitle">Foto 1 de 48</span>
+    <div class="lightbox-actions">
+      <button class="lb-btn" id="lbFavBtn" onclick="toggleFavLB()">♡ Favoritar</button>
+      <button class="lb-btn" onclick="showToast('Download iniciado!')">↓ Baixar</button>
+      <button class="lb-btn" onclick="showToast('Compartilhamento copiado!')"></button>
+      <button class="lightbox-close" onclick="closeLB()">✕</button>
+    </div>
+  </div>
+  <div class="lightbox-main">
+    <button class="lb-arrow left" onclick="lbNav(-1)">‹</button>
+    <img id="lbImg" src="" alt="">
+    <button class="lb-arrow right" onclick="lbNav(1)">›</button>
+  </div>
+  <div class="lightbox-footer">
+    <span class="lb-counter" id="lbCounter">1 / 48</span>
+    <div class="lb-thumbs" id="lbThumbs"></div>
+  </div>
+</div>
+
+<script>
+// CURSOR
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+document.addEventListener('mousemove',e=>{ cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px'; ring.style.left=e.clientX+'px'; ring.style.top=e.clientY+'px'; });
+
+// PHOTOS DATA (usando Unsplash)
+const photoData = [
+  { id:1, src:'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop', cat:'ceremony', label:'Cerimônia' },
+  { id:2, src:'https://images.unsplash.com/photo-1583939411023-14783179e581?w=800&q=80&auto=format&fit=crop', cat:'ceremony', label:'Cerimônia' },
+  { id:3, src:'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&q=80&auto=format&fit=crop', cat:'party', label:'Festa' },
+  { id:4, src:'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800&q=80&auto=format&fit=crop', cat:'details', label:'Detalhes' },
+  { id:5, src:'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80&auto=format&fit=crop', cat:'party', label:'Festa' },
+  { id:6, src:'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80&auto=format&fit=crop', cat:'ceremony', label:'Cerimônia' },
+  { id:7, src:'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80&auto=format&fit=crop', cat:'details', label:'Detalhes' },
+  { id:8, src:'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80&auto=format&fit=crop', cat:'ceremony', label:'Cerimônia' },
+  { id:9, src:'https://images.unsplash.com/photo-1529636798458-92182e662485?w=800&q=80&auto=format&fit=crop', cat:'party', label:'Festa' },
+  { id:10, src:'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80&auto=format&fit=crop', cat:'ceremony', label:'Cerimônia' },
+  { id:11, src:'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80&auto=format&fit=crop', cat:'party', label:'Festa' },
+  { id:12, src:'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&q=80&auto=format&fit=crop', cat:'details', label:'Detalhes' },
+];
+
+// Repetir para ter mais fotos
+const photos = [];
+for(let r=0;r<4;r++) photoData.forEach((p,i) => photos.push({...p, id: r*photoData.length+i+1}));
+
+let currentTab='all', lbIndex=0, selectedItems=new Set(), favoriteItems=new Set(), allSelected=false;
+
+// LOGIN
+function doLogin(){
+  const code=document.getElementById('accessCode').value.trim();
+  const pass=document.getElementById('accessPass').value.trim();
+  const err=document.getElementById('loginError');
+  if(!code||!pass){ err.style.display='flex'; return; }
+  // Demo: aceita qualquer entrada
+  err.style.display='none';
+  document.getElementById('screen-login').style.display='none';
+  document.getElementById('screen-gallery').style.display='block';
+  document.getElementById('btn-logout').style.display='inline';
+  // Set client name from code
+  const parts=code.split('-');
+  const name = parts.length>=2 ? parts[0]+' & '+parts[1] : code;
+  document.getElementById('gallery-client-name').textContent=name;
+  document.getElementById('gallery-event-name').innerHTML=name;
+  renderGallery();
+  startCountdown();
+}
+function togglePassword(){
+  const inp=document.getElementById('accessPass');
+  inp.type=inp.type==='password'?'text':'password';
+}
+function logout(){
+  document.getElementById('screen-gallery').style.display='none';
+  document.getElementById('screen-login').style.display='flex';
+  document.getElementById('btn-logout').style.display='none';
+}
+
+// GALLERY
+function getFilteredPhotos(){
+  if(currentTab==='all') return photos;
+  if(currentTab==='favorites') return photos.filter(p=>favoriteItems.has(p.id));
+  return photos.filter(p=>p.cat===currentTab);
+}
+
+function renderGallery(){
+  const grid=document.getElementById('photoGrid');
+  grid.innerHTML='';
+  const filtered=getFilteredPhotos();
+  if(!filtered.length){
+    const empty=document.createElement('div');
+    empty.style.gridColumn='1/-1';
+    empty.innerHTML='<div class="empty-state"><span class="empty-state-icon">♡</span><span class="empty-state-text">Nenhuma foto favorita ainda</span></div>';
+    grid.appendChild(empty);
+    return;
+  }
+  filtered.forEach((p,i)=>{
+    const el=document.createElement('div');
+    el.className='photo-item'+(selectedItems.has(p.id)?' checked':'')+(favoriteItems.has(p.id)?' favorited':'');
+    el.dataset.id=p.id;
+    el.innerHTML=`
+      <img src="${p.src}" alt="${p.label}" loading="lazy">
+      <div class="photo-overlay">
+        <div class="photo-checkbox" onclick="toggleSelect(event,${p.id})">✓</div>
+        <div class="photo-actions">
+          <button class="photo-action-btn" onclick="toggleFav(event,${p.id})" title="Favoritar">${favoriteItems.has(p.id)?'♥':'♡'}</button>
+          <button class="photo-action-btn" onclick="openLB(event,${i})" title="Expandir">⤢</button>
+          <button class="photo-action-btn" onclick="showToast('Download iniciado!')" title="Baixar">↓</button>
+        </div>
+      </div>
+      <div class="photo-badge">Favorita</div>
+    `;
+    el.addEventListener('click', e=>{ if(!e.target.closest('.photo-overlay')) openLB(e,i); });
+    grid.appendChild(el);
+  });
+  document.getElementById('stat-photos').textContent=filtered.length;
+  document.getElementById('count-all').textContent=photos.length;
+}
+
+function toggleSelect(e,id){
+  e.stopPropagation();
+  if(selectedItems.has(id)) selectedItems.delete(id);
+  else selectedItems.add(id);
+  updateSelection();
+  renderGallery();
+}
+function updateSelection(){
+  const n=selectedItems.size;
+  const fb=document.getElementById('floatBar');
+  const sc=document.getElementById('selectedCount');
+  document.getElementById('fbCount').textContent=n;
+  sc.textContent=n+' selecionadas';
+  sc.style.display=n>0?'block':'none';
+  if(n>0){fb.classList.add('visible');}else{fb.classList.remove('visible');}
+}
+function clearSelection(){ selectedItems.clear(); updateSelection(); renderGallery(); }
+function toggleSelectAll(){
+  const filtered=getFilteredPhotos();
+  if(allSelected){clearSelection();allSelected=false;}
+  else{filtered.forEach(p=>selectedItems.add(p.id));allSelected=true;updateSelection();renderGallery();}
+}
+
+function toggleFav(e,id){
+  e.stopPropagation();
+  if(favoriteItems.has(id)) favoriteItems.delete(id);
+  else { favoriteItems.add(id); showToast('Adicionado aos favoritos'); }
+  document.getElementById('stat-favs').textContent=favoriteItems.size;
+  document.getElementById('count-favs').textContent=favoriteItems.size;
+  renderGallery();
+}
+
+// TAB
+function switchTab(el,tab){
+  document.querySelectorAll('.gal-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  currentTab=tab;
+  allSelected=false; selectedItems.clear(); updateSelection();
+  renderGallery();
+}
+
+// VIEW
+function setView(btn,mode){
+  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const grid=document.getElementById('photoGrid');
+  if(mode==='list') grid.classList.add('view-list');
+  else grid.classList.remove('view-list');
+}
+
+// LIGHTBOX
+function openLB(e,idx){
+  e && e.stopPropagation();
+  const filtered=getFilteredPhotos();
+  lbIndex=idx;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+  renderLB(filtered);
+}
+function renderLB(filtered){
+  if(!filtered) filtered=getFilteredPhotos();
+  const p=filtered[lbIndex];
+  if(!p) return;
+  document.getElementById('lbImg').src=p.src;
+  document.getElementById('lbTitle').textContent=p.label+' — Ana & Pedro';
+  document.getElementById('lbCounter').textContent=(lbIndex+1)+' / '+filtered.length;
+  // fav btn
+  const fb=document.getElementById('lbFavBtn');
+  if(favoriteItems.has(p.id)){fb.textContent='Favoritado';fb.classList.add('fav-active');}
+  else{fb.textContent='♡ Favoritar';fb.classList.remove('fav-active');}
+  // thumbs
+  const thumbs=document.getElementById('lbThumbs');
+  thumbs.innerHTML='';
+  const start=Math.max(0,lbIndex-3), end=Math.min(filtered.length,start+7);
+  for(let i=start;i<end;i++){
+    const t=document.createElement('img');
+    t.className='lb-thumb'+(i===lbIndex?' active':'');
+    t.src=filtered[i].src; t.loading='lazy';
+    const ii=i;
+    t.addEventListener('click',()=>{ lbIndex=ii; renderLB(filtered); });
+    thumbs.appendChild(t);
+  }
+}
+function lbNav(dir){
+  const filtered=getFilteredPhotos();
+  lbIndex=(lbIndex+dir+filtered.length)%filtered.length;
+  renderLB(filtered);
+}
+function closeLB(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+function toggleFavLB(){
+  const filtered=getFilteredPhotos();
+  const p=filtered[lbIndex];
+  if(!p) return;
+  toggleFav(null,p.id);
+  renderLB(filtered);
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key==='ArrowRight') lbNav(1);
+  if(e.key==='ArrowLeft') lbNav(-1);
+  if(e.key==='Escape') closeLB();
+});
+
+// TOAST
+let toastTimeout;
+function showToast(msg){
+  clearTimeout(toastTimeout);
+  document.getElementById('toastMsg').textContent=msg;
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  toastTimeout=setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// COUNTDOWN
+function startCountdown(){
+  const expiry=new Date('2025-06-14');
+  function update(){
+    const now=new Date();
+    const diff=expiry-now;
+    if(diff<=0){document.getElementById('countdown').textContent='expirado';return;}
+    const d=Math.floor(diff/86400000);
+    document.getElementById('countdown').textContent=d+' dias';
+  }
+  update(); setInterval(update,60000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style/rafael.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Rafael<span>.</span>Lima</a>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#portfolio">Portfólio</a></li>
+    <li><a href="#services">Pacotes</a></li>
+    <li><a href="#testimonials">Depoimentos</a></li>
+  </ul>
+  <a href="agendamento.html" class="nav-cta">Agendar Sessão</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-photo"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Fotógrafo de Casamentos &amp; Eventos</p>
+    <h1 class="hero-title">Eternizando os<br><em>momentos</em> que<br>importam</h1>
+    <p class="hero-subtitle">Cada imagem é uma história. Cada história, uma emoção que transcende o tempo.</p>
+    <div class="hero-actions">
+      <a href="galeria-privada.html" class="btn-primary">Ver SeuPortfólio</a>
+      <a href="agendamento.html" class="btn-ghost">Agendar Agora</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-wrap reveal">
+    <div class="about-img-frame">
+      <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&q=80&auto=format&fit=crop" alt="Rafael Lima">
+      <div class="about-years">
+        <strong>10+</strong>
+        <span>Anos</span>
+      </div>
+    </div>
+    <div class="about-decoration"></div>
+  </div>
+  <div class="about-text-col reveal reveal-delay-2">
+    <span class="section-label">Conheça o Fotógrafo</span>
+    <h2 class="section-title">Arte, <em>luz</em> e<br>emoção em<br>cada quadro</h2>
+    <p class="about-text">Rafael Lima acredita que a fotografia vai além de registrar um momento — ela captura a essência de quem você é. Com mais de 10 anos de experiência em casamentos, eventos sociais e ensaios fotográficos, cada trabalho é tratado com cuidado artístico único.</p>
+    <p class="about-text">Seu estilo combina fotojornalismo documental com uma estética visual cuidadosamente elaborada, resultando em imagens atemporais que contam histórias genuínas.</p>
+    <div class="about-stats">
+      <div class="stat-item">
+        <strong>380+</strong>
+        <span>Casamentos</span>
+      </div>
+      <div class="stat-item">
+        <strong>950+</strong>
+        <span>Eventos</span>
+      </div>
+      <div class="stat-item">
+        <strong>100%</strong>
+        <span>Satisfação</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon"></span></div>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-header reveal">
+    <span class="section-label">Trabalhos Selecionados</span>
+    <h2 class="section-title">Portfólio</h2>
+  </div>
+  <div class="portfolio-tabs reveal">
+    <button class="tab-btn active">Todos</button>
+    <button class="tab-btn">Casamentos</button>
+    <button class="tab-btn">Eventos</button>
+    <button class="tab-btn">Ensaios</button>
+  </div>
+  <div class="portfolio-grid reveal">
+    <div class="portfolio-item" onclick="openLightbox('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=90&auto=format')">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop" alt="Casamento">
+      <div class="portfolio-item-overlay"><span class="portfolio-item-label">Ana &amp; Bruno — Casamento</span></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox('https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=90&auto=format')">
+      <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80&auto=format&fit=crop" alt="Evento">
+      <div class="portfolio-item-overlay"><span class="portfolio-item-label">Gala Corporativa 2024</span></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox('https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1200&q=90&auto=format')">
+      <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800&q=80&auto=format&fit=crop" alt="Ensaio">
+      <div class="portfolio-item-overlay"><span class="portfolio-item-label">Ensaio — Família Costa</span></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox('https://images.unsplash.com/photo-1583939411023-14783179e581?w=1200&q=90&auto=format')">
+      <img src="https://images.unsplash.com/photo-1583939411023-14783179e581?w=800&q=80&auto=format&fit=crop" alt="Casamento">
+      <div class="portfolio-item-overlay"><span class="portfolio-item-label">Clara &amp; Pedro — Cerimônia</span></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&q=90&auto=format')">
+      <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80&auto=format&fit=crop" alt="Evento">
+      <div class="portfolio-item-overlay"><span class="portfolio-item-label">Festival Gastronômico SP</span></div>
+    </div>
+  </div>
+  <div class="view-all-wrap reveal">
+    <a href="galeria-privada.html" class="btn-ghost">Ver todo o portfólio →</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header reveal">
+    <span class="section-label">Investimento</span>
+    <h2 class="section-title">Pacotes &amp; <em>Serviços</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <h3 class="service-name">Ensaio Fotográfico</h3>
+      <p class="service-desc">Sessões personalizadas para casais, famílias ou individuais, em locação externa ou estúdio.</p>
+      <ul class="service-features">
+        <li>Até 2h de sessão</li>
+        <li>50 fotos editadas</li>
+        <li>Galeria digital privada</li>
+        <li>1 locação de sua escolha</li>
+      </ul>
+      <div class="service-price">
+        <span class="price-from">A partir de</span>
+        <span class="price-val">R$ 800</span>
+      </div>
+    </div>
+    <div class="service-card featured reveal reveal-delay-1">
+      <div class="badge-featured">Mais Popular</div>
+      <span class="service-num">02</span>
+      <h3 class="service-name">Casamento Completo</h3>
+      <p class="service-desc">Cobertura total do seu dia especial, do making-of à festa, com equipe dedicada.</p>
+      <ul class="service-features">
+        <li>Cobertura de até 12h</li>
+        <li>300+ fotos editadas</li>
+        <li>Álbum impresso de luxo</li>
+        <li>Making-of &amp; cerimônia</li>
+        <li>Drone incluso</li>
+        <li>Galeria protegida</li>
+      </ul>
+      <div class="service-price">
+        <span class="price-from">A partir de</span>
+        <span class="price-val">R$ 4.800</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-num">03</span>
+      <h3 class="service-name">Evento Corporativo</h3>
+      <p class="service-desc">Fotografias profissionais para eventos empresariais, conferências e celebrações.</p>
+      <ul class="service-features">
+        <li>Cobertura de até 8h</li>
+        <li>150+ fotos editadas</li>
+        <li>Entrega em 5 dias úteis</li>
+        <li>Licença comercial inclusa</li>
+      </ul>
+      <div class="service-price">
+        <span class="price-from">A partir de</span>
+        <span class="price-val">R$ 2.200</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header reveal">
+    <span class="section-label">O que dizem</span>
+    <h2 class="section-title">Histórias &amp; <em>Depoimentos</em></h2>
+  </div>
+  <div class="testimonials-wrap">
+    <div class="testimonial-card reveal">
+      <span class="quote-mark">"</span>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">Rafael capturou cada detalhe do nosso casamento com uma sensibilidade incrível. As fotos são simplesmente lindas e emocionais. Recomendo de olhos fechados!</p>
+      <div class="testimonial-author">
+        <img class="author-avatar" src="https://i.pravatar.cc/80?img=47" alt="Ana Souza">
+        <div>
+          <span class="author-name">Ana &amp; Bruno Souza</span>
+          <span class="author-event">Casamento — Março 2024</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-1">
+      <span class="quote-mark">"</span>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">Contratamos o Rafael para o nosso evento corporativo e o resultado superou todas as expectativas. Profissionalismo impecável do começo ao fim.</p>
+      <div class="testimonial-author">
+        <img class="author-avatar" src="https://i.pravatar.cc/80?img=11" alt="Carlos Mendes">
+        <div>
+          <span class="author-name">Carlos Mendes</span>
+          <span class="author-event">Evento Corporativo — 2024</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <span class="quote-mark">"</span>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">As fotos do ensaio de família ficaram mágicas. O Rafael tem um talento único de capturar a essência das pessoas de forma natural e espontânea.</p>
+      <div class="testimonial-author">
+        <img class="author-avatar" src="https://i.pravatar.cc/80?img=32" alt="Família Costa">
+        <div>
+          <span class="author-name">Família Costa</span>
+          <span class="author-event">Ensaio Familiar — 2024</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="booking-inner">
+    <div class="booking-info reveal">
+      <span class="section-label">Vamos Conversar</span>
+      <h2 class="section-title">Agende sua<br><em>sessão</em></h2>
+      <p>Cada projeto é único. Conte-me sobre o seu momento especial e juntos criaremos imagens que durarão para sempre.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">✉</div>
+        <div>
+          <span class="contact-lbl">E-mail</span>
+          <span class="contact-val">contato@rafaellima.foto</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">☎</div>
+        <div>
+          <span class="contact-lbl">WhatsApp</span>
+          <span class="contact-val">+55 (11) 99999-9999</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">◎</div>
+        <div>
+          <span class="contact-lbl">Localização</span>
+          <span class="contact-val">São Paulo — SP</span>
+        </div>
+      </div>
+    </div>
+    <form class="booking-form reveal reveal-delay-1" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" placeholder="Seu nome completo">
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" placeholder="seu@email.com">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Telefone</label>
+          <input type="tel" placeholder="(11) 99999-9999">
+        </div>
+        <div class="form-group">
+          <label>Data do Evento</label>
+          <input type="date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tipo de Serviço</label>
+        <select>
+          <option value="">Selecione um pacote</option>
+          <option>Ensaio Fotográfico</option>
+          <option>Casamento Completo</option>
+          <option>Evento Corporativo</option>
+          <option>Personalizado</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensagem</label>
+        <textarea rows="5" placeholder="Conte-me sobre o seu projeto..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Enviar Solicitação</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Rafael<span style="color:var(--gold)">.</span>Lima</a>
+      <p class="footer-bio">Fotógrafo profissional especializado em casamentos, eventos e ensaios. Baseado em São Paulo, atendendo em todo o Brasil.</p>
+      <div class="social-links">
+        <a href="#" class="social-link">in</a>
+        <a href="#" class="social-link">ig</a>
+        <a href="#" class="social-link">fb</a>
+        <a href="#" class="social-link">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul class="footer-links">
+        <li><a href="#about">Sobre mim</a></li>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#services">Pacotes</a></li>
+        <li><a href="#testimonials">Depoimentos</a></li>
+        <li><a href="#booking">Contato</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <ul class="footer-links">
+        <li><a href="#">Casamentos</a></li>
+        <li><a href="#">Eventos</a></li>
+        <li><a href="#">Ensaios</a></li>
+        <li><a href="#">Corporativo</a></li>
+        <li><a href="#">Galeria Privada</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul class="footer-links">
+        <li><a href="#">São Paulo — SP</a></li>
+        <li><a href="#">contato@rafaellima.foto</a></li>
+        <li><a href="#">(11) 99999-9999</a></li>
+        <li><a href="#">@rafaellima.foto</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 <span>Rafael Lima Fotografia</span>. Todos os direitos reservados.</p>
+    <p class="footer-copy">Desenvolvido por Evellyn e Gabriela</p>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  rx += (e.clientX - rx) * .12;
+  ry += (e.clientY - ry) * .12;
+  ring.style.left = e.clientX + 'px';
+  ring.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.portfolio-item').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '18px'; cursor.style.height = '18px';
+    ring.style.width = '56px'; ring.style.height = '56px';
+    ring.style.opacity = '.8';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '10px'; cursor.style.height = '10px';
+    ring.style.width = '38px'; ring.style.height = '38px';
+    ring.style.opacity = '.55';
+  });
+});
+
+// NAVBAR
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+reveals.forEach(el => io.observe(el));
+
+// TABS
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// LIGHTBOX
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('lightbox').addEventListener('click', e => {
+  if(e.target === e.currentTarget) closeLightbox();
+});
+
+// FORM SUBMIT
+document.querySelector('.form-submit').addEventListener('click', function() {
+  const btn = this;
+  btn.textContent = '✓ Solicitação Enviada!';
+  btn.style.background = '#2a2a2a';
+  btn.style.color = 'var(--gold)';
+  setTimeout(() => {
+    btn.textContent = 'Enviar Solicitação';
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 3000);
+});
+</script>
+</body>
+</html>

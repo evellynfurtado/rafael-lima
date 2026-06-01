@@ -1,0 +1,502 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agendar Sessão — Rafael Lima Fotografia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style/agendamento.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">Voltar ao site</a>
+  <a href="index.html" class="nav-logo">Rafael<span>.</span>Lima</a>
+  <div style="width:130px"></div>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+  <span class="page-header-label">Sistema de Agendamento</span>
+  <h1>Agende sua<br><em>sessão</em></h1>
+  <p>Escolha o serviço, a data e horário ideais. Processo simples, rápido e seguro.</p>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar">
+  <div class="progress-fill" id="progressFill" style="width:25%"></div>
+</div>
+
+<!-- STEPPER -->
+<div style="padding:0 60px; margin-bottom:50px;">
+  <div class="stepper">
+    <div class="step-item active" id="step-ind-1">
+      <div class="step-circle">1</div>
+      <span class="step-label">Serviço</span>
+    </div>
+    <div class="step-item" id="step-ind-2">
+      <div class="step-circle">2</div>
+      <span class="step-label">Data &amp; Hora</span>
+    </div>
+    <div class="step-item" id="step-ind-3">
+      <div class="step-circle">3</div>
+      <span class="step-label">Seus Dados</span>
+    </div>
+    <div class="step-item" id="step-ind-4">
+      <div class="step-circle">✓</div>
+      <span class="step-label">Confirmação</span>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="booking-layout">
+
+  <!-- MAIN CONTENT -->
+  <div>
+
+    <!-- STEP 1: SERVIÇO -->
+    <div class="panel active" id="panel-1">
+      <div style="margin-bottom:32px;">
+        <span style="font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:12px;">Passo 01</span>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:#fff; font-weight:300;">Qual serviço você precisa?</h2>
+      </div>
+      <div class="service-select-grid">
+        <div class="service-option" onclick="selectService(this,'Ensaio Fotográfico','R$ 800')" data-service="Ensaio Fotográfico" data-price="800">
+          <div class="service-option-check">✓</div>
+          <div class="service-option-name">Ensaio Fotográfico</div>
+          <p class="service-option-desc">Sessões personalizadas para casais, famílias ou individuais. Locação externa ou estúdio.</p>
+          <span class="service-option-price">A partir de R$ 800</span>
+        </div>
+        <div class="service-option" onclick="selectService(this,'Casamento Completo','R$ 4.800')" data-service="Casamento Completo" data-price="4800">
+          <div class="service-option-check">✓</div>
+          <div class="service-option-name">Casamento Completo</div>
+          <p class="service-option-desc">Cobertura total do seu dia especial. Making-of, cerimônia e festa com equipe dedicada.</p>
+          <span class="service-option-price">A partir de R$ 4.800</span>
+        </div>
+        <div class="service-option" onclick="selectService(this,'Evento Corporativo','R$ 2.200')" data-service="Evento Corporativo" data-price="2200">
+          <div class="service-option-check">✓</div>
+          <div class="service-option-name">Evento Corporativo</div>
+          <p class="service-option-desc">Fotografias profissionais para conferências, galas empresariais e celebrações.</p>
+          <span class="service-option-price">A partir de R$ 2.200</span>
+        </div>
+        <div class="service-option" onclick="selectService(this,'Personalizado','A combinar')" data-service="Personalizado" data-price="0">
+          <div class="service-option-check">✓</div>
+          <div class="service-option-name">Personalizado</div>
+          <p class="service-option-desc">Tem algo especial em mente? Criamos um pacote exclusivo para o seu projeto único.</p>
+          <span class="service-option-price">Orçamento personalizado</span>
+        </div>
+      </div>
+      <div class="btn-actions end">
+        <button class="btn-primary" id="btn-step1" onclick="goToStep(2)" disabled>Próximo Passo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: DATA & HORA -->
+    <div class="panel" id="panel-2">
+      <div style="margin-bottom:32px;">
+        <span style="font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:12px;">Passo 02</span>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:#fff; font-weight:300;">Escolha a data e horário</h2>
+      </div>
+
+      <!-- CALENDÁRIO -->
+      <div class="calendar-wrap">
+        <div class="cal-header">
+          <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+          <span class="cal-title" id="calTitle">Maio 2025</span>
+          <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+        </div>
+        <div class="cal-grid" id="calGrid">
+          <div class="cal-weekday">Dom</div>
+          <div class="cal-weekday">Seg</div>
+          <div class="cal-weekday">Ter</div>
+          <div class="cal-weekday">Qua</div>
+          <div class="cal-weekday">Qui</div>
+          <div class="cal-weekday">Sex</div>
+          <div class="cal-weekday">Sáb</div>
+        </div>
+        <div class="cal-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div> Selecionado</div>
+          <div class="legend-item"><div class="legend-dot" style="background:rgba(201,169,110,.4)"></div> Reservado</div>
+          <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,.15)"></div> Indisponível</div>
+        </div>
+      </div>
+
+      <!-- HORÁRIOS -->
+      <div class="time-slots-wrap" id="timeSlotWrap" style="display:none;">
+        <span class="time-slots-title">Horários disponíveis — <span id="selectedDateLabel"></span></span>
+        <div class="time-slots-grid" id="timeGrid"></div>
+      </div>
+
+      <div class="btn-actions">
+        <button class="btn-secondary" onclick="goToStep(1)">← Voltar</button>
+        <button class="btn-primary" id="btn-step2" onclick="goToStep(3)" disabled>Próximo Passo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: DADOS -->
+    <div class="panel" id="panel-3">
+      <div style="margin-bottom:32px;">
+        <span style="font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:12px;">Passo 03</span>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:#fff; font-weight:300;">Seus dados de contato</h2>
+      </div>
+
+      <div class="form-section-title">Informações Pessoais</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nome Completo *</label>
+          <input type="text" id="f-nome" placeholder="Seu nome" oninput="validateStep3()">
+        </div>
+        <div class="form-group">
+          <label>E-mail *</label>
+          <input type="email" id="f-email" placeholder="seu@email.com" oninput="validateStep3()">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp *</label>
+          <input type="tel" id="f-tel" placeholder="(11) 99999-9999" oninput="validateStep3()">
+        </div>
+        <div class="form-group">
+          <label>Como nos encontrou?</label>
+          <select>
+            <option value="">Selecione...</option>
+            <option>Instagram</option>
+            <option>Indicação</option>
+            <option>Google</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Local do Evento / Sessão</label>
+          <input type="text" placeholder="Ex: Fazenda das Flores, Campinas — SP">
+        </div>
+        <div class="form-group full">
+          <label>Mensagem</label>
+          <textarea rows="4" placeholder="Conte mais sobre o seu projeto, expectativas ou dúvidas..."></textarea>
+        </div>
+      </div>
+
+      <!-- ADICIONAIS -->
+      <div class="extras-wrap">
+        <span class="extras-title">Adicionar serviços extras</span>
+        <div class="extra-item" onclick="toggleExtra(this, 500)">
+          <div class="extra-info">
+            <span class="extra-name">Cobertura de Drone</span>
+            <span class="extra-desc">Imagens aéreas do evento em 4K</span>
+          </div>
+          <div class="extra-right">
+            <span class="extra-price">+ R$ 500</span>
+            <div class="toggle" id="toggle-0"></div>
+          </div>
+        </div>
+        <div class="extra-item" onclick="toggleExtra(this, 350)">
+          <div class="extra-info">
+            <span class="extra-name">Álbum Impresso de Luxo</span>
+            <span class="extra-desc">Álbum 30x30cm com 50 páginas premium</span>
+          </div>
+          <div class="extra-right">
+            <span class="extra-price">+ R$ 350</span>
+            <div class="toggle" id="toggle-1"></div>
+          </div>
+        </div>
+        <div class="extra-item" onclick="toggleExtra(this, 200)">
+          <div class="extra-info">
+            <span class="extra-name">Segundo Fotógrafo</span>
+            <span class="extra-desc">Para cobrir ângulos simultâneos</span>
+          </div>
+          <div class="extra-right">
+            <span class="extra-price">+ R$ 200</span>
+            <div class="toggle" id="toggle-2"></div>
+          </div>
+        </div>
+        <div class="extra-item" onclick="toggleExtra(this, 150)">
+          <div class="extra-info">
+            <span class="extra-name">Entrega Expressa (48h)</span>
+            <span class="extra-desc">Receba as fotos editadas em 48 horas</span>
+          </div>
+          <div class="extra-right">
+            <span class="extra-price">+ R$ 150</span>
+            <div class="toggle" id="toggle-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-actions">
+        <button class="btn-secondary" onclick="goToStep(2)">← Voltar</button>
+        <button class="btn-primary" id="btn-step3" onclick="goToStep(4)" disabled>Confirmar Agendamento →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: CONFIRMAÇÃO -->
+    <div class="panel" id="panel-4">
+      <div class="confirm-wrap">
+        <span class="confirm-icon">✦</span>
+        <h2 class="confirm-title">Solicitação <em>confirmada!</em></h2>
+        <p class="confirm-text">Seu agendamento foi recebido com sucesso. Rafael Lima entrará em contato em até 24 horas para confirmar todos os detalhes e processar o pagamento.</p>
+        <div class="confirm-details">
+          <div class="confirm-row">
+            <span class="confirm-row-label">Serviço</span>
+            <span class="confirm-row-value" id="conf-service">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-row-label">Data</span>
+            <span class="confirm-row-value" id="conf-date">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-row-label">Horário</span>
+            <span class="confirm-row-value" id="conf-time">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-row-label">Cliente</span>
+            <span class="confirm-row-value" id="conf-name">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-row-label">Total estimado</span>
+            <span class="confirm-row-value gold" id="conf-total">—</span>
+          </div>
+        </div>
+        <div class="confirm-actions">
+          <a href="index.html" class="btn-primary" style="text-decoration:none;">Voltar ao Site</a>
+          <button class="btn-secondary" onclick="window.print()">Imprimir Comprovante</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+
+  <!-- SIDEBAR -->
+  <aside class="booking-sidebar">
+    <div class="summary-card">
+      <span class="summary-title">Resumo do Pedido</span>
+      <div class="summary-item">
+        <span class="summary-item-label">Serviço</span>
+        <span class="summary-item-value" id="sum-service">Não selecionado</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-item-label">Data</span>
+        <span class="summary-item-value" id="sum-date">—</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-item-label">Horário</span>
+        <span class="summary-item-value" id="sum-time">—</span>
+      </div>
+      <div class="summary-item" id="sum-extras-row" style="display:none;">
+        <span class="summary-item-label">Adicionais</span>
+        <span class="summary-item-value" id="sum-extras">—</span>
+      </div>
+    </div>
+    <div class="summary-total">
+      <span class="summary-total-label">Estimativa</span>
+      <span class="summary-total-val" id="sum-total">R$ —</span>
+    </div>
+    <div class="summary-note">
+      ✦ 50% de sinal no agendamento. Saldo restante 3 dias antes do evento.
+    </div>
+    <div class="photographer-card">
+      <img class="photographer-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80&fit=crop" alt="Rafael Lima">
+      <div class="photographer-info">
+        <div class="photographer-name">Rafael Lima</div>
+        <div class="photographer-role">Fotógrafo Profissional</div>
+        <div class="photographer-rating">★★★★★ 5.0 (142 avaliações)</div>
+      </div>
+    </div>
+  </aside>
+
+</div><!-- /booking-layout -->
+
+<div class="page-footer">© 2025 Rafael Lima Fotografia — Todos os direitos reservados</div>
+
+<script>
+// CURSOR
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+document.addEventListener('mousemove',e=>{
+  cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';
+  ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';
+});
+
+// STATE
+const state = { service:'', price:0, date:'', time:'', extras:0, extraCount:0 };
+let currentStep = 1;
+
+// CALENDAR - INICIALIZAÇÃO DINÂMICA
+// CALENDAR - INICIALIZAÇÃO E LÓGICA
+const months = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+// Se quiser desabilitar dias, adicione aqui. Se estiver vazio, tudo fica liberado.
+const bookedDays = []; 
+
+let calYear = new Date().getFullYear();
+let calMonth = new Date().getMonth();
+
+function renderCalendar(){
+  const title = document.getElementById('calTitle');
+  title.textContent = months[calMonth] + ' ' + calYear;
+  const grid = document.getElementById('calGrid');
+  
+  // Limpa o grid, mas mantém o cabeçalho (7 elementos)
+  while(grid.children.length > 7) grid.removeChild(grid.lastChild);
+  
+  const first = new Date(calYear, calMonth, 1).getDay();
+  const days = new Date(calYear, calMonth + 1, 0).getDate();
+  
+  // Pega a data atual zerada (sem horas) para comparar corretamente
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  
+  // Preenche espaços vazios
+  for(let i = 0; i < first; i++){
+    const d = document.createElement('div');
+    d.className = 'cal-day empty';
+    grid.appendChild(d);
+  }
+  
+  // Cria os dias do mês
+  for(let d = 1; d <= days; d++){
+    const el = document.createElement('div');
+    el.className = 'cal-day';
+    el.textContent = d;
+    
+    const dt = new Date(calYear, calMonth, d);
+    
+    // Simplificando a lógica de bloqueio para garantir que funcione
+    const isPast = dt < today;
+    const isBooked = bookedDays.includes(d);
+    
+    if(isPast) {
+        el.classList.add('past');
+    } else if(isBooked) {
+        el.classList.add('booked');
+    } else {
+        // Apenas adiciona o evento de clique se não for passado nem reservado
+        el.addEventListener('click', () => selectDate(el, d));
+        if(dt.toDateString() === today.toDateString()) {
+            el.classList.add('today');
+        }
+    }
+    grid.appendChild(el);
+  }
+}
+function changeMonth(dir){
+  calMonth += dir;
+  if(calMonth > 11){ calMonth = 0; calYear++; }
+  if(calMonth < 0){ calMonth = 11; calYear--; }
+  renderCalendar();
+  
+  // Reseta seleção ao trocar de mês
+  document.getElementById('timeSlotWrap').style.display = 'none';
+  state.date = '';
+  state.time = '';
+  updateSidebar();
+  document.getElementById('btn-step2').disabled = true;
+}
+
+function selectDate(el, day){
+  document.querySelectorAll('.cal-day.selected').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  
+  const dateStr = `${String(day).padStart(2,'0')}/${String(calMonth + 1).padStart(2,'0')}/${calYear}`;
+  state.date = dateStr;
+  
+  document.getElementById('sum-date').textContent = dateStr;
+  document.getElementById('selectedDateLabel').textContent = dateStr;
+  
+  renderTimeSlots(day);
+  document.getElementById('timeSlotWrap').style.display = 'block';
+  
+  // Reseta horário ao mudar data
+  state.time = '';
+  document.getElementById('btn-step2').disabled = true;
+}
+
+const TIMES=['09:00','10:00','11:00','13:00','14:00','15:00','16:00','17:00'];
+const unavailableTimes=[1,4]; // índices
+function renderTimeSlots(day){
+  const grid=document.getElementById('timeGrid');
+  grid.innerHTML='';
+  TIMES.forEach((t,i)=>{
+    const el=document.createElement('div');
+    el.className='time-slot';el.textContent=t;
+    if(unavailableTimes.includes(i))el.classList.add('unavailable');
+    else el.addEventListener('click',()=>selectTime(el,t));
+    grid.appendChild(el);
+  });
+}
+function selectTime(el,t){
+  document.querySelectorAll('.time-slot.selected').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');
+  state.time=t;
+  document.getElementById('sum-time').textContent=t;
+  document.getElementById('btn-step2').disabled=false;
+}
+
+function selectService(el,name,price){
+  document.querySelectorAll('.service-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  state.service=name;
+  const raw=el.dataset.price;
+  state.price=parseInt(raw)||0;
+  document.getElementById('sum-service').textContent=name;
+  updateTotal();
+  document.getElementById('btn-step1').disabled=false;
+}
+
+// EXTRAS
+const extraValues=[];
+function toggleExtra(el, val){
+  const toggles=document.querySelectorAll('.toggle');
+  const idx=Array.from(document.querySelectorAll('.extra-item')).indexOf(el);
+  const t=document.getElementById('toggle-'+idx);
+  const on=t.classList.toggle('on');
+  if(on){state.extras+=val;}else{state.extras-=val;}
+  updateTotal();
+}
+function updateTotal(){
+  const total=state.price+state.extras;
+  const disp=state.price===0?'A combinar':`R$ ${total.toLocaleString('pt-BR')}`;
+  document.getElementById('sum-total').textContent=disp;
+}
+function updateSidebar(){
+  document.getElementById('sum-date').textContent=state.date||'—';
+  document.getElementById('sum-time').textContent=state.time||'—';
+}
+
+function validateStep3(){
+  const n=document.getElementById('f-nome').value.trim();
+  const e=document.getElementById('f-email').value.trim();
+  const t=document.getElementById('f-tel').value.trim();
+  document.getElementById('btn-step3').disabled=!(n&&e&&t);
+}
+
+function goToStep(n){
+  // update stepper
+  for(let i=1;i<=4;i++){
+    const ind=document.getElementById('step-ind-'+i);
+    const circle=ind.querySelector('.step-circle');
+    if(i<n){ind.className='step-item done';circle.textContent='✓';}
+    else if(i===n){ind.className='step-item active';circle.textContent=i;}
+    else{ind.className='step-item';circle.textContent=i===4?'✓':i;}
+  }
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+n).classList.add('active');
+  document.getElementById('progressFill').style.width=(n/4*100)+'%';
+  currentStep=n;
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  if(n===4){
+    // fill confirmation
+    document.getElementById('conf-service').textContent=state.service||'—';
+    document.getElementById('conf-date').textContent=state.date||'—';
+    document.getElementById('conf-time').textContent=state.time||'—';
+    document.getElementById('conf-name').textContent=document.getElementById('f-nome').value||'—';
+    const total=state.price+state.extras;
+    document.getElementById('conf-total').textContent=state.price===0?'A combinar':`R$ ${total.toLocaleString('pt-BR')}`;
+  }
+}
+
+renderCalendar();
+</script>
+</body>
+</html>
